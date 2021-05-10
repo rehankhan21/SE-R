@@ -13,6 +13,7 @@ import Square from "./Square"
 import Hooks from "./Hooks"
 
 import Toggle from "./ToggleOn"
+import OnChange from './OnChange';
 
 function App() {
 
@@ -25,8 +26,10 @@ function App() {
       {/* <Count  />
       <Hooks /> */}
 
-      <Toggle />
-      <Count />
+      {/* <Toggle />
+      <Count /> */}
+
+      <OnChange />
 
     </div>
   );
