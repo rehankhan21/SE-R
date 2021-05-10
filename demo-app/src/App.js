@@ -26,6 +26,7 @@ function App() {
       <Hooks /> */}
 
       <Toggle />
+      <Count />
 
     </div>
   );
