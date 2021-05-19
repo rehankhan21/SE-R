@@ -6,6 +6,7 @@ class ShowQuestion extends Component {
         super(props)
 
         this.state = {
+            question: this.props.question,
             isActive: false
         }
     }
@@ -13,7 +14,7 @@ class ShowQuestion extends Component {
     render() {
         return (
             <div>
-                
+
             </div>
         )
     }
