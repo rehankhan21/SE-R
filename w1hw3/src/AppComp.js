@@ -15,7 +15,7 @@ class Tardis extends Component {
         this.changeIt = this.changeIt.bind(this)
     }
 
-    changeIt = (text) => {
+    changeIt = () => {
         if (this.state.tardis.caps) {
             this.setState({
                 tardis: {
