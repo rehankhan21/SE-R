@@ -33,6 +33,7 @@ function Login() {
         }
     }
 
+
     const handleChange = (event) => {
 
         // const {name, value} = event.target
@@ -62,11 +63,11 @@ function Login() {
 
     // let handleChange
     let logincheck = () => {
-        if(loginInfo.loggedIn == true){
-            return <Success />
+        if(loginInfo.loggedIn === true){
+            return <Success name={tmpUser}/>
             // return "logged in"
         }
-        else if(loginInfo.loggedIn == false){
+        else if(loginInfo.loggedIn === false){
             return <Failure />
             // return "not logged in"
         }

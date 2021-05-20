@@ -1,9 +1,10 @@
-import react from 'react'
+import React from 'react'
 
-function Success () {
-
+function Success (props) {
+    console.log(props.username)
     return(
-        <div>You are logged in</div>
+        <div>You are logged in {props.name}</div>
+        
     )
 
 }
