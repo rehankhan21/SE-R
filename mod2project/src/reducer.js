@@ -1,7 +1,12 @@
 export const initialState = {
     arr: [
         {
+            id: 1,
             value: ""
+        },
+        {
+            id: 2,
+            value: "hello 2"
         }
     ]
 }
