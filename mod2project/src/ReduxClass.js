@@ -52,8 +52,6 @@ class Redux extends Component {
     // }
 
     // Deep Translate api
-
-
     async fetchData() {
         let res = "";
         const options = {
