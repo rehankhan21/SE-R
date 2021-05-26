@@ -1,11 +1,18 @@
 import './App.css';
-import Redux from './ReduxClass';
+import ReduxCom from './ReduxClass';
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 
 function App() {
   return (
-    <div className="App">
-      <Redux />
-    </div>
+    <Router>
+      <div className="App">
+        {/*NavBar component for all the componeents */}
+        <Switch>
+          <Route path="/" exact component={ReduxCom}/>
+           {/* <Redux /> */}
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

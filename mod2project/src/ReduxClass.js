@@ -9,13 +9,13 @@ class Redux extends Component {
 
         this.state = {
 
-            arr: [
+            animeList: [
                 {
                     value: ""
                 }
             ],
 
-            word: "hi",
+            word: "naruto",
             pic: "https://cdn.myanimelist.net/images/anime/7/3791.jpg",
             pic2: 0
         }
@@ -63,7 +63,7 @@ class Redux extends Component {
                 'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
                 'x-rapidapi-host': 'deep-translate1.p.rapidapi.com'
             },
-            data: { q: 'Hello World!', source: 'en', target: 'ja' }
+            data: { q: 'hello', source: 'en', target: 'ja' }
         };
 
         await axios.request(options).then(function (response) {
@@ -108,21 +108,27 @@ class Redux extends Component {
     // }
 
     async fetchAnime() {
+        let res = ""
         const options = {
             method: 'GET',
             url: 'https://jikan1.p.rapidapi.com/search/anime?limit=5',
-            params: {q: 'naruto'},
+            params: {q: this.state.word},
             headers: {
               'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
               'x-rapidapi-host': 'jikan1.p.rapidapi.com'
             }
           };
           
-          axios.request(options).then(function (response) {
+         await axios.request(options).then(function (response) {
               console.log(response.data);
+              res = response.data
           }).catch(function (error) {
               console.error(error);
           });
+
+          this.setState({
+              pic2: res.results[0].image_url
+          })
     }
 
 
