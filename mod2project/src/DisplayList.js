@@ -5,6 +5,7 @@ function DisplayList(props) {
         return <div>
             <div>{JSON.stringify(props.list[i].title)}</div>
             <img src={props.list[i].image_url}></img>
+            <div>Score: {props.list[i].score} /10</div>
             <div>{props.list[i].synopsis}</div>
             <a href={props.list[i].url}>myanimelist</a>
         </div>
