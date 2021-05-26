@@ -10,21 +10,9 @@ class AnimeList extends Component {
         super(props)
 
         this.state = {
-            list: [
-                {
-                    name: "test name",
-                    description: "test description",
-                    score: "21"
-                },
-                {
-                    name: "test name 2",
-                    descritption: "test description 2",
-                    score: "420"
+            list: [],
 
-                }
-            ],
-
-            search: ""
+            search: "naruto"
         }
 
         this.fetchAnime = this.fetchAnime.bind(this)
@@ -56,12 +44,14 @@ class AnimeList extends Component {
         //     pic2: res.results[0].image_url
         // })
 
-        let newArray = res.results.slice()
+        if(res.results !== undefined){
+             let newArray = res.results.slice()
 
-        this.setState({
-            list: newArray
-        })
-
+             this.setState({
+                list: newArray
+            })
+        }
+       
         console.log(this.state.list)
 
     }

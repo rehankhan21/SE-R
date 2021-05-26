@@ -125,7 +125,7 @@ class Redux extends Component {
             console.error(error);
         });
 
-       if(res.results[0].image_url != false) {
+       if(res.results[0].image_url !== false) {
             this.setState({
                 pic2: res.results[0].image_url
             })
@@ -150,7 +150,7 @@ class Redux extends Component {
                 <button onClick={this.fetchAnime}>
                     get anime
                </button>
-                <img src={this.state.pic2 ? this.state.pic2: "no picture"} alt="no picture"></img>
+                <img src={this.state.pic2 ? this.state.pic2: "no picture"} alt="not found"></img>
             </div>
         )
     }
