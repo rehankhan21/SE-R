@@ -25,7 +25,7 @@ class AnimeList extends Component {
         let res = ""
         const options = {
             method: 'GET',
-            url: 'https://jikan1.p.rapidapi.com/search/anime?limit=5',
+            url: 'https://jikan1.p.rapidapi.com/search/anime?limit=5&genre=12&genre_exclude=0',
             params: { q: this.state.search },
             headers: {
                 'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
