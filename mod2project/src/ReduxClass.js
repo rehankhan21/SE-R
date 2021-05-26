@@ -18,7 +18,7 @@ class Redux extends Component {
             word: "naruto",
             pic: "https://cdn.myanimelist.net/images/anime/7/3791.jpg",
             pic2: 0,
-            translate: "hello"
+            translate: "cherry"
         }
 
         this.fetchData = this.fetchData.bind(this)
@@ -125,9 +125,11 @@ class Redux extends Component {
             console.error(error);
         });
 
-        this.setState({
-            pic2: res.results[0].image_url
-        })
+       if(res.results[0].image_url != false) {
+            this.setState({
+                pic2: res.results[0].image_url
+            })
+        }
     }
 
 
@@ -148,7 +150,7 @@ class Redux extends Component {
                 <button onClick={this.fetchAnime}>
                     get anime
                </button>
-                <img src={this.state.pic2} alt="no picture"></img>
+                <img src={this.state.pic2 ? this.state.pic2: "no picture"} alt="no picture"></img>
             </div>
         )
     }

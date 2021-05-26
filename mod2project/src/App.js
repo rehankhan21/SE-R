@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
 
 import Translate from './Translate'
 import Nav from './Nav';
+import AnimeList from './AnimeList';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/" exact component={ReduxCom}/>
            {/* <Redux /> */}
            <Route path="/translate" component={Translate}/>
+           <Route path="/animelist" component={AnimeList}/>
         </Switch>
       </div>
     </Router>
