@@ -17,7 +17,8 @@ class Redux extends Component {
 
             word: "naruto",
             pic: "https://cdn.myanimelist.net/images/anime/7/3791.jpg",
-            pic2: 0
+            pic2: 0,
+            translate: "hello"
         }
 
         this.fetchData = this.fetchData.bind(this)
@@ -63,7 +64,7 @@ class Redux extends Component {
                 'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
                 'x-rapidapi-host': 'deep-translate1.p.rapidapi.com'
             },
-            data: { q: 'hello', source: 'en', target: 'ja' }
+            data: { q: this.state.translate, source: 'en', target: 'ja' }
         };
 
         await axios.request(options).then(function (response) {
@@ -112,34 +113,37 @@ class Redux extends Component {
         const options = {
             method: 'GET',
             url: 'https://jikan1.p.rapidapi.com/search/anime?limit=5',
-            params: {q: this.state.word},
+            params: { q: this.state.word },
             headers: {
-              'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
-              'x-rapidapi-host': 'jikan1.p.rapidapi.com'
+                'x-rapidapi-key': 'bbb8bbd286msh51087b0bbfe175fp14ad82jsn950349773c0d',
+                'x-rapidapi-host': 'jikan1.p.rapidapi.com'
             }
-          };
-          
-         await axios.request(options).then(function (response) {
-              console.log(response.data);
-              res = response.data
-          }).catch(function (error) {
-              console.error(error);
-          });
+        };
 
-          this.setState({
-              pic2: res.results[0].image_url
-          })
+        await axios.request(options).then(function (response) {
+            console.log(response.data);
+            res = response.data
+        }).catch(function (error) {
+            console.error(error);
+        });
+
+        this.setState({
+            pic2: res.results[0].image_url
+        })
     }
 
 
     render() {
         return (
             <div>
-                Redux Practice
+                Translate
                 {/* {JSON.stringfy(this.props.arr)} */}
                 {console.log(this.props.arr)}
                 {console.log(this.props.id)}
                 <button onClick={this.fetchData}>translate</button>
+                <div>
+                    {this.state.translate}
+                </div>
                 <div>
                     {this.state.word}
                 </div>
