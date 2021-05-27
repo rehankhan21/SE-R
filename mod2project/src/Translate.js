@@ -78,10 +78,9 @@ class Translate extends Component {
                     <input value={this.state.word} onChange={this.handleChange}></input>
                     <button>Translate</button>
                 </form>
-                <div>{this.state.word}</div>
+                {/* <div>{this.state.word}</div> */}
                 <div>
-                    {this.state.translated}
-                    <button>Add to fav</button>
+                    {/* {this.state.translated} */}
                 </div>
                 <Favwords wordList = {this.state.list}/>
             </div>
