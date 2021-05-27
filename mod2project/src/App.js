@@ -6,6 +6,7 @@ import Translate from './Translate'
 import Nav from './Nav';
 import AnimeList from './AnimeList';
 import MaterialNav from './MaterialNav';
+import TopAnime from './TopAnime'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           {/* <Redux /> */}
           <Route path="/translate" component={Translate} />
           <Route path="/animelist" component={AnimeList} />
+          <Route path="/topanime" component={TopAnime}/>
         </Switch>
       </div>
     </Router>
