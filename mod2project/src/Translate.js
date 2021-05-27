@@ -9,7 +9,11 @@ class Translate extends Component {
         super(props)
 
         this.state = {
-            list: ["hello"],
+            list: [
+                {
+                    
+                },
+            ],
             word: "hello",
             translated: ""
         }
@@ -47,6 +51,18 @@ class Translate extends Component {
         })
 
         let wordList = this.state.list.slice()
+        // wordList.push(this.state.word)
+        // wordList.push(this.state.translated)
+        let prevTrans = {
+            word: this.state.word,
+            translated: this.state.translated
+        }
+
+        wordList.push(prevTrans)
+
+        this.setState({
+            list: wordList
+        })
     }
 
     handleChange(event) {
@@ -71,6 +87,7 @@ class Translate extends Component {
                     {this.state.translated}
                     <button>Add to fav</button>
                 </div>
+                <Favwords wordList = {this.state.list}/>
             </div>
         )
     }
