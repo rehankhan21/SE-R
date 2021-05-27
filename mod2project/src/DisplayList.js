@@ -11,16 +11,21 @@ function DisplayList(props) {
     //     // </div>
 
     // };
+    function fav(list) {
+
+        console.log(list)
+    } 
 
     const list = props.list;
     const display = list.map((list) =>
 
-        <div>
+        <div className="anime_containter">
             <div>{list.title}</div>
             <img src={list.image_url} alt="not found"></img>
             <div>Score: {list.score} /10</div>
             <div>{list.synopsis}</div>
             <a href={list.url}>myanimelist</a>
+            <button onClick={fav}>Add to fav</button>
         </div>
     );
 

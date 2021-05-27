@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Component } from 'react'
+import Favwords from './Favwords'
 
 class Translate extends Component {
 
@@ -8,6 +9,7 @@ class Translate extends Component {
         super(props)
 
         this.state = {
+            list: ["hello"],
             word: "hello",
             translated: ""
         }
@@ -43,6 +45,8 @@ class Translate extends Component {
         this.setState({
             translated: res.translations.translatedText
         })
+
+        let wordList = this.state.list.slice()
     }
 
     handleChange(event) {
@@ -62,8 +66,10 @@ class Translate extends Component {
                     <input value={this.state.word} onChange={this.handleChange}></input>
                     <button>Translate</button>
                 </form>
+                <div>{this.state.word}</div>
                 <div>
                     {this.state.translated}
+                    <button>Add to fav</button>
                 </div>
             </div>
         )
