@@ -15,7 +15,11 @@ export const initialState = {
     //     title: "test",
     //     rank: 21
     // }
-    ]
+    ],
+
+    animeList: [],
+
+    search: "yugioh"
 }
 
 export default function reducer(state = initialState, action ) {
@@ -31,7 +35,13 @@ export default function reducer(state = initialState, action ) {
                  // then only update this specific object in state
                 topList: action.payload.arr
              }
-        
+        case 'ADD_Anime_List':
+
+             return {
+                 ...state,
+                 animeList: action.payload.arr 
+             }
+
 
         default : return state
 

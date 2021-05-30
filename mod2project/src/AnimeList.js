@@ -3,6 +3,7 @@ import { Component } from 'react'
 import axios from 'axios'
 import DisplayList from './DisplayList'
 import TopAnime from './TopAnime'
+import { connect } from 'react-redux'
 
 class AnimeList extends Component {
 
@@ -11,8 +12,8 @@ class AnimeList extends Component {
         super(props)
 
         this.state = {
-            list: [],
-            topList: [],
+            // list: [],
+            // topList: [],
             search: "naruto"
         }
 
@@ -48,12 +49,19 @@ class AnimeList extends Component {
         if (res.results !== undefined) {
             let newArray = res.results.slice()
 
-            this.setState({
-                list: newArray
+            // this.setState({
+            //     list: newArray
+            // })
+
+            this.props.dispatch({
+                type: 'ADD_Anime_List',
+                payload: {
+                    arr: newArray
+                }
             })
         }
 
-        console.log(this.state.list)
+        //console.log(this.state.list)
 
     }
 
@@ -63,6 +71,7 @@ class AnimeList extends Component {
             search: event.target.value
         })
 
+        
     }
 
     // async fetchTopAnime() {
@@ -105,7 +114,8 @@ class AnimeList extends Component {
                     <button>Search</button>
                 </form>
 
-                <DisplayList list={this.state.list} />
+                {/* <DisplayList list={this.state.list} /> */}
+                <DisplayList list={this.props.animeList}/>
                 {/* <TopAnime topList = {this.fetchTopAnime}/>
                 <button onClick={this.fetchTopAnime}>top</button> */}
             </div>
@@ -113,4 +123,11 @@ class AnimeList extends Component {
     }
 }
 
-export default AnimeList;
+const mapStateToProps = state => {
+
+    return {
+        animeList : state.animeList
+    }
+}
+
+export default connect(mapStateToProps)(AnimeList)
