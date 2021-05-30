@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import DisplayTop from './DisplayTop'
+import { connect } from 'react-redux'
 
 class TopAnime extends Component {
 
     constructor(props){
         super(props)
 
-        this.state = {
-            topList : []
-        }
+        // this.state = {
+        //     topList : []
+        // }
 
         this.fetchTopAnime = this.fetchTopAnime.bind(this)
     }
@@ -37,12 +38,22 @@ class TopAnime extends Component {
         if (res.top !== undefined) {
             let newArray = res.top.slice()
 
-            this.setState({
-                topList: newArray
-            })
-        }
+            // this.setState({
+            //     topList: newArray
+            // })
 
-        console.log(this.state.topList)
+            this.props.dispatch({
+                type: 'ADD_ITEM_TOP',
+                payload: {
+                    id: 1,
+                    arr: newArray
+                }
+            })
+
+            console.log(newArray)
+        }
+        
+        console.log(this.props.topList)
 
     }
 
@@ -51,10 +62,19 @@ class TopAnime extends Component {
         return(
             <div>
                 <button onClick={this.fetchTopAnime}>Top 50 Anime</button>
-                <DisplayTop topList = {this.state.topList}/>
+                {/* <DisplayTop topList = {this.state.topList}/> */}
+                <DisplayTop topList = {this.props.topList}/>
             </div>
         )
     }
+
 }
 
-export default TopAnime
+const mapStateToProps = state => {
+        
+    return {
+        topList : state.topList
+    }
+}
+
+export default connect(mapStateToProps)(TopAnime)

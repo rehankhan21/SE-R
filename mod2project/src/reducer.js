@@ -8,6 +8,13 @@ export const initialState = {
             id: 2,
             value: "hello 2"
         }
+    ],
+
+    topList: [
+    //     {
+    //     title: "test",
+    //     rank: 21
+    // }
     ]
 }
 
@@ -17,15 +24,16 @@ export default function reducer(state = initialState, action ) {
 
     switch(action.type) {
 
-        case 'ADD_ITEM' :
+        case 'ADD_ITEM_TOP' :
             // some logic
-
-            return state
+             return {
+                 ...state, // make a copy of the inital state
+                 // then only update this specific object in state
+                topList: action.payload.arr
+             }
         
 
-        default :
-
-            return state
+        default : return state
 
     }
 }
