@@ -1,21 +1,13 @@
 export const initialState = {
-    arr: [
-        {
-            id: 1,
-            value: ""
-        },
-        {
-            id: 2,
-            value: "hello 2"
-        }
-    ],
-
+    
     topList: [
     //     {
     //     title: "test",
     //     rank: 21
     // }
     ],
+
+    wordList: [],
 
     animeList: [],
 
@@ -40,6 +32,12 @@ export default function reducer(state = initialState, action ) {
              return {
                  ...state,
                  animeList: action.payload.arr 
+             }
+        case 'ADD_WORD':
+
+             return {
+                 ...state,
+                 wordList: action.payload.arr
              }
 
 

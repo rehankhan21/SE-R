@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Favwords(props) {
-    const list = props.wordList;
+    const list = props.list;
     const display = list.map((list) =>
 
         <div className="anime_containter">

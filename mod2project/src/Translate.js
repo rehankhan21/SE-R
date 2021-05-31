@@ -3,13 +3,14 @@ import axios from 'axios'
 import { Component } from 'react'
 import Favwords from './Favwords'
 
+import { connect } from 'react-redux'
+
 class Translate extends Component {
 
     constructor(props) {
         super(props)
 
         this.state = {
-            list: [],
             word: "hello",
             translated: ""
         }
@@ -46,7 +47,7 @@ class Translate extends Component {
             translated: res.translations.translatedText
         })
 
-        let wordList = this.state.list.slice()
+        let wordList = this.props.wordList.slice()
         // wordList.push(this.state.word)
         // wordList.push(this.state.translated)
         let prevTrans = {
@@ -56,8 +57,15 @@ class Translate extends Component {
 
         wordList.push(prevTrans)
 
-        this.setState({
-            list: wordList
+        // this.setState({
+        //     list: wordList
+        // })
+
+        this.props.dispatch({
+            type: 'ADD_WORD',
+            payload: {
+                arr: wordList
+            }
         })
     }
 
@@ -82,11 +90,18 @@ class Translate extends Component {
                 <div>
                     {/* {this.state.translated} */}
                 </div>
-                <Favwords wordList = {this.state.list}/>
+                <Favwords list = {this.props.wordList}/>
             </div>
         )
     }
 
 }
 
-export default Translate;
+const mapStateToProps = state => {
+
+    return {
+        wordList : state.wordList
+    }
+}
+
+export default connect(mapStateToProps)(Translate);
