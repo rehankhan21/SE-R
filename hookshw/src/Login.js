@@ -64,7 +64,7 @@ function Login() {
     // let handleChange
     let logincheck = () => {
         if(loginInfo.loggedIn === true){
-            return <Success name={tmpUser}/>
+            return <Success name={user}/>
             // return "logged in"
         }
         else if(loginInfo.loggedIn === false){
