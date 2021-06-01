@@ -11,6 +11,7 @@ class Translate extends Component {
         super(props)
 
         this.state = {
+            id: 0,
             word: "hello",
             translated: ""
         }
@@ -51,6 +52,7 @@ class Translate extends Component {
         // wordList.push(this.state.word)
         // wordList.push(this.state.translated)
         let prevTrans = {
+            id: this.state.id += 1,
             word: this.state.word,
             translated: this.state.translated
         }

@@ -1,5 +1,5 @@
 export const initialState = {
-    
+
     topList: [
     //     {
     //     title: "test",
@@ -11,7 +11,9 @@ export const initialState = {
 
     animeList: [],
 
-    search: "yugioh"
+    search: "yugioh",
+
+    savedWords: []
 }
 
 export default function reducer(state = initialState, action ) {
@@ -39,9 +41,11 @@ export default function reducer(state = initialState, action ) {
                  ...state,
                  wordList: action.payload.arr
              }
-
+        case 'SAVE_WORD':
+            return {
+                ...state,
+            }
 
         default : return state
-
     }
 }
