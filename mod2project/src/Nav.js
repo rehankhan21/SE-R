@@ -11,6 +11,7 @@ function Nav() {
                     <Link to="/"><li>Translate</li></Link>
                     <Link to="/AnimeList"><li>Anime Search</li></Link>
                     <Link to="/TopAnime"><li>Top Anime List</li></Link>
+                    <Link to="/SavedWords"><li>Saved Words</li></Link>
                 </ul>
             </nav>
         </div>

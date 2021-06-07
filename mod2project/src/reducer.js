@@ -44,6 +44,12 @@ export default function reducer(state = initialState, action ) {
         case 'SAVE_WORD':
             return {
                 ...state,
+                savedWords: action.payload.word
+            }
+        case 'REMOVE_SAVED':
+            return {
+                ...state,
+                savedWords: action.payload.arr
             }
 
         default : return state

@@ -73,7 +73,8 @@ class TopAnime extends Component {
 const mapStateToProps = state => {
         
     return {
-        topList : state.topList
+        topList : state.topList,
+        saved: state.savedWords
     }
 }
 

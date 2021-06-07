@@ -12,7 +12,7 @@ class Translate extends Component {
 
         this.state = {
             id: 0,
-            word: "hello",
+            word: "h",
             translated: ""
         }
         
@@ -102,7 +102,8 @@ class Translate extends Component {
 const mapStateToProps = state => {
 
     return {
-        wordList : state.wordList
+        wordList : state.wordList,
+        saved: state.savedWords
     }
 }
 

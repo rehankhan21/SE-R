@@ -7,6 +7,7 @@ import Nav from './Nav';
 import AnimeList from './AnimeList';
 // import MaterialNav from './MaterialNav';
 import TopAnime from './TopAnime'
+import SavedWords from './SavedWords';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" exact component={Translate} />
           <Route path="/animelist" component={AnimeList} />
           <Route path="/topanime" component={TopAnime}/>
+          <Route path="/savedwords" component={SavedWords}/>
         </Switch>
       </div>
     </Router>
