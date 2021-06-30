@@ -24,6 +24,7 @@ class Translate extends Component {
     async fetchTranslation(event) {
         event.preventDefault()
         let res = "";
+        let $ninja = "hello";
         const options = {
             method: 'POST',
             url: 'https://deep-translate1.p.rapidapi.com/language/translate/v2',

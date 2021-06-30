@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import ReduxCom from './ReduxClass';
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom"
