@@ -1,0 +1,111 @@
+private static String Attended = 'Attended';
+    private static String NotAttended = 'No Show';
+    private static String Rescheduled = 'Rescheduled';
+
+    private static String InPerson = 'In-person';
+    private static String PhoneCall = 'Phone Call';
+    private static String VirtualMeeting = 'Virtual Meeting';
+    private static List<String> types = New List<String> {InPerson, PhoneCall, VirtualMeeting};
+    /**
+     * @date: 2019
+     * @description:
+     * @Tested True = TestEventsController.TestInsert  TestEventsController.TestUpdate TestDelete
+     **/
+    public static void meetingCountTrigger(List<Event> events, String op, Map<ID,Event> oldEvents){
+        boolean needToReOrder = false;
+        Id contactId;
+        Id meetingId;
+        boolean onlyPending = false;
+        boolean noShow = false;
+
+        for (Event e : events) {
+            System.debug(e);
+            String meetingType = e.Meeting_Type__c;
+            // if the event is not a change machine event or the meeting types is not one of the following, skip to the next
+            if (!e.Change_Machine_Event__c || !(meetingType == InPerson || meetingType ==  PhoneCall || meetingType == VirtualMeeting) ) continue;
+            Event oldE;
+            if (op == 'update') {
+                oldE = oldEvents.get(e.Id);
+            }
+            if(op == 'update' && (oldE.Status__c == Attended && e.Status__c == Attended)) { // if e.Status__c is Attended, we need to reorder
+                needToReOrder = true;
+                contactId = e.WhoId;
+            }else if ( (op == 'insert' || op == 'delete') && e.Status__c == Attended) {
+                contactId = e.WhoId;
+                needToReOrder = true;
+             }else if(op == 'update' && ((oldE.Status__c != Attended || oldE.Status__c == Attended) && (e.Status__c == NotAttended || e.Status__c == Rescheduled))) {
+                meetingId = e.Id;
+                contactId = e.WhoId;
+                noShow = true;
+                needToReOrder = true;
+            }else if(op == 'update' && (oldE.Status__c != Attended && e.Status__c == Attended)){
+                contactId = e.WhoId;
+                needToReOrder = true;
+            }else{
+                onlyPending = true;
+                contactId = e.WhoId;
+            }
+
+            if(noShow){
+                noShow(contactId, meetingId);
+            }
+
+            if (needToReOrder){
+                reorderAttendedMeetings(contactId); 
+                return;
+            }
+
+        }
+        // if we reach here it means that we don't have attended meetings in this trigger
+        if(onlyPending) {
+            setCSDNextPending(contactId);
+        }
+    }
+
+    public static void noShow(Id contactId, Id meetingId){
+        DMLManager.checkAccess(Event.getSObjectType());
+
+        List<Event> meetings = [SELECT Id, StartDateTime, Meeting_Number__c, Status__c FROM Event
+                                WHERE Change_Machine_Event__c = true AND Meeting_Type__c IN:types AND WhoId =:contactId];
+
+        Integer length = meetings.size();
+
+         for(Integer i = 0; i < length; i++){
+
+            Id mId = meetings[i].Id;
+             if(mId == meetingId){
+                 meetings[i].Meeting_Number__c = 0;
+                 break;
+             }
+         }                                                                                                                       
+
+        DMLManager.updateAsUser(meetings);
+    }
+
+
+e.Status__c = 'No Show';
+        }
+        update insertedEvents;
+        Test.stopTest();
+        List<Event> eventsByDate = [SELECT Id,Meeting_Number__c,ActivityDateTime FROM Event
+                                    WHERE Status__c =: 'Attended' AND Meeting_Type__c =: 'In-person' AND WhoId =:contact.Id
+                                                                                                                 ORDER BY ActivityDateTime ASC];
+        List<Event> eventsByMeetingNumber = [SELECT Id,Meeting_Number__c,ActivityDateTime FROM Event
+                                             WHERE Status__c = 'Attended' AND Meeting_Type__c = 'In-person' AND WhoId =:contact.Id
+                                                                                                                        ORDER BY Meeting_Number__c ASC];
+                                                                                        
+        List<Event> eventsByDateNoShow = [SELECT Id,Meeting_Number__c,ActivityDateTime FROM Event
+                                    WHERE Status__c =: 'NoShow' AND Meeting_Type__c =: 'In-person' AND WhoId =:contact.Id
+                                                                                                                 ORDER BY ActivityDateTime ASC];
+                                                                                                            
+        List<Event> eventsByMeetingNumberNoShow = [SELECT Id,Meeting_Number__c,ActivityDateTime FROM Event
+                                             WHERE Status__c = 'No Show' AND Meeting_Type__c = 'In-person' AND WhoId =:contact.Id
+                                                                                                                        ORDER BY Meeting_Number__c ASC];                                                                                                                
+
+        for(Integer i = 0; i < eventsByDate.size(); ++i) {
+            System.assert (eventsByDate[i].Id == eventsByMeetingNumber[i].Id, eventsByDate[i].Id + ' ' + eventsByMeetingNumber[i].Id);
+        }
+
+        for(Integer i = 0; i < eventsByDateNoShow.size(); ++i) {
+            System.assert (eventsByDateNoShow[i].Id == eventsByMeetingNumberNoShow[i].Id, eventsByDateNoShow[i].Id + ' ' + eventsByMeetingNumberNoShow[i].Id);
+        }   
